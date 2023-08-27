@@ -1,6 +1,5 @@
 const { Message, Client } = require("discord.js");
 const { Structure, Manager } = require("erela.js");
-//const { nodes, SpotifyID, SpotifySecret } = require("../config/client");
 const fetch = require("node-fetch").default;
 const cheerio = require("cheerio");
 const { readdirSync } = require("fs");
