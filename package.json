@@ -1,0 +1,49 @@
+{
+  "name": "staffmanager-dcbot",
+  "version": "1.0.0",
+  "description": "Sistema de administracion de puntos staff.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MahiroStudios/staffmanager-dcbot"
+  },
+  "keywords": [
+    "tickets",
+    "support",
+    "discord.js-v14"
+  ],
+  "author": "ronaldzav",
+  "license ": "GPL",
+  "bugs": "https://github.com/MahiroStudios/staffmanager-dcbot/issues",
+  "homepage": "https://github.com/MahiroStudios/staffmanager-dcbot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^1.0.0",
+    "@napi-rs/canvas": "^0.1.29",
+    "chalk": "^4.1.2",
+    "cheerio": "^1.0.0-rc.12",
+    "console": "^0.7.2",
+    "delay": "^5.0.0",
+    "discord-anti-spam": "^2.8.1",
+    "discord-html-transcripts": "^3.1.3",
+    "discord.js": "^14.12.1",
+    "dotenv": "^10.0.0",
+    "erela.js": "^2.4.0",
+    "jquery": "^3.6.3",
+    "jsonfile": "^6.1.0",
+    "lodash": "^4.17.21",
+    "megadb": "^3.4.0",
+    "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2",
+    "mongoose": "^6.0.12",
+    "ms": "^2.1.3",
+    "node-fetch": "^2.6.9",
+    "node-superfetch": "^0.2.3",
+    "nodemon": "^2.0.20",
+    "quick.db": "^9.0.6",
+    "systeminformation": "^5.9.13"
+  }
+}
