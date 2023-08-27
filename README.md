@@ -1,2 +1,2 @@
-# staffmanager-dcbot
-Administra las evidencias de tus staff y otórgales puntos
+# Staff Manager
+Administra las evidencias de tus staff en discord y otórgales puntos
