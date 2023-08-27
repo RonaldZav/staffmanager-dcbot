@@ -1,6 +1,3 @@
-## Staff Manager v0.7.1 BETA
-Administra las evidencias de tus staff en discord y otórgales puntos
-
 # Requisitos
 Requiere NodeJS v18 y se recomienda tener reservado 500MB de almacenamiento y 300MB de RAM.
 
