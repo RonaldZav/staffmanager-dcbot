@@ -12,7 +12,7 @@ module.exports = {
     waitingChannel: "1144763219915853877", // Id del canal donde las evidencias esperan ser aprobadas.
     alerts: "1144763219915853877", // Id del canal donde llegaran las alertas.
     scoreEvidenceAccept: "5", // Cantidad de puntos a sumar por evidencia aceptada
-    scoreEvidenceDeny: "0", // Cantidad de puntos a restart por evidencia rechazada
+    scoreEvidenceDeny: "0", // Cantidad de puntos a restar por evidencia rechazada
 
 }
 
