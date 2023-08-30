@@ -35,16 +35,18 @@ class MahiroStudios extends Client {
     this.embedColor = this.config.embedColor;
     this.evidences = this.config.evidences;
     this.waitingChannel = this.config.waitingChannel;
-    this.alert = this.config.alerts;
+    this.alerts = this.config.alerts;
     this.customActivity = this.config.customActivity;
     this.scoreEvidenceAccept = this.config.scoreEvidenceAccept;
     this.scoreEvidenceDeny = this.config.scoreEvidenceDeny;
+    this.maxStrikes = this.config.maxStrikes;
     this.guildId = this.config.guildId;
     this.aliases = new Collection();
     this.commands = new Collection();
     this.logger = require("../utils/logger.js");
     if (!this.token) this.token = this.config.token;
     this.manager = new Loader(this);
+
 
     this.rest.on("rateLimited", (info) => { this.logger.log(info, "log"); });
 
