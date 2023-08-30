@@ -38,7 +38,7 @@ module.exports = {
 	
 	let db = new megadb.crearDB({ nombre: "score", carpeta: "storage" });
 
-	const score = await db.obtener(interaction.member.id + '-score', "-") || "0";
+	const score = await db.obtener(miembro.id + '-score', "-") || "0";
 
 	const embed = new EmbedBuilder()
 	.setTitle(messages.title)
@@ -50,7 +50,7 @@ if(/^[0-9]+$/.test(valor)){
 	
 		const result = parseInt(score) + parseInt(valor);
 
-		db.establecer(interaction.member.id, {score: result}, "-"); 
+		db.establecer(miembro.id, {score: result}, "-"); 
 		interaction.reply({ embeds: [embed] });
 	};
 
@@ -59,7 +59,7 @@ if(/^[0-9]+$/.test(valor)){
 			if(Number(valor) <= score){
 			const result = parseInt(score) - parseInt(valor);
 
-			db.establecer(interaction.member.id, {score: result}, "-"); 
+			db.establecer(miembro.id, {score: result}, "-"); 
 			interaction.reply({ embeds: [embed] });
 			} else { interaction.reply({ content: `No puedes quitarle mas puntaje del que tiene, quedaria en numeros negativos.`, ephemeral: true })	
 		}
@@ -68,7 +68,7 @@ if(/^[0-9]+$/.test(valor)){
 
 	if(opcion === "set") { embed.setDescription(`Se establecio en ${valor} los puntos de ${miembro}`)
 
-	db.establecer(interaction.member.id, {score: valor}, "-"); 
+	db.establecer(miembro.id, {score: valor}, "-"); 
 	interaction.reply({ embeds: [embed] });
 	};
 
