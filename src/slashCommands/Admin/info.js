@@ -15,7 +15,9 @@ module.exports = {
         const member = interaction.options.getUser('miembro');
 
         let db = new megadb.crearDB({ nombre: "score", carpeta: "storage" });
+        let strikesDB = new megadb.crearDB({ nombre: "strikes", carpeta: "storage" });
         const score = await db.obtener(member.id + '-score', "-") || "0";
+        const strikes = await strikesDB.obtener(member.id + '-strikes', "-") || "0";
 
         const guild = interaction.guild;
         
@@ -53,7 +55,7 @@ module.exports = {
             .setColor(client.embedColor)
             .setThumbnail(member.displayAvatarURL({ dynamic: true, size: 4096 }))
             .setFooter({ text: messages.footer })
-            .setDescription(`**Puntos:** ${score}\n**Antigüedad:** ${timeOld}`);
+            .setDescription(`**Puntos:** ${score}\n**Antigüedad:** ${timeOld}\n**Strikes**: ${strikes}`);
         
         interaction.reply({ embeds: [embed] });
     }
