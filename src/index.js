@@ -1,7 +1,5 @@
-const MahiroStudios = require("./structures/Client");
-const client = new MahiroStudios();
-const moment = require('moment');
-const { Client, GatewayIntentBits, Partials, WebhookClient } = require("discord.js");
+const RonaldZav = require("./structures/Client");
+const client = new RonaldZav();
 
 client.connect()
 

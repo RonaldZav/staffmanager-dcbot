@@ -1,8 +1,19 @@
 const { Client, Collection, GatewayIntentBits, Partials } = require("discord.js");
-const mongoose = require("mongoose");
-const Loader = require("./Loader");
+const fs = require('fs');
+const yaml = require('js-yaml');
+const logger = require("../utils/logger.js");
 
-class MahiroStudios extends Client {
+let settings;
+try {
+  const contenidoYAML = fs.readFileSync('./src/settings.yml', 'utf8');
+  const datosJSON = yaml.load(contenidoYAML);
+  settings = datosJSON;
+} catch (error) {
+  logger.log(`Error leyendo los datos de config.yml:`, "error");
+  console.log(error);
+}
+
+class RonaldZav extends Client {
   constructor() {
     super({
       failIfNotExists: true,
@@ -11,11 +22,11 @@ class MahiroStudios extends Client {
       },
       intents: [
         GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessageReactions,
+		    GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.GuildMembers,
+		    GatewayIntentBits.GuildMembers,
         GatewayIntentBits.DirectMessages,
         GatewayIntentBits.GuildInvites,
       ],
@@ -27,26 +38,13 @@ class MahiroStudios extends Client {
       ],
     });
     this.commands = new Collection();
-
     this.slashCommands = new Collection();
-    this.config = require("../config/client.js");
-    this.owner = this.config.ownerID;
-    this.prefix = this.config.prefix;
-    this.embedColor = this.config.embedColor;
-    this.evidences = this.config.evidences;
-    this.waitingChannel = this.config.waitingChannel;
-    this.alerts = this.config.alerts;
-    this.customActivity = this.config.customActivity;
-    this.scoreEvidenceAccept = this.config.scoreEvidenceAccept;
-    this.scoreEvidenceDeny = this.config.scoreEvidenceDeny;
-    this.maxStrikes = this.config.maxStrikes;
-    this.guildId = this.config.guildId;
+    this.config = require("../client.js");
+    this.settings = settings;
     this.aliases = new Collection();
     this.commands = new Collection();
     this.logger = require("../utils/logger.js");
     if (!this.token) this.token = this.config.token;
-    this.manager = new Loader(this);
-
 
     this.rest.on("rateLimited", (info) => { this.logger.log(info, "log"); });
 
@@ -57,4 +55,4 @@ class MahiroStudios extends Client {
 
 }
 
-module.exports = MahiroStudios;
+module.exports = RonaldZav;

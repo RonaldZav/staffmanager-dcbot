@@ -1,17 +1,10 @@
 const { PermissionsBitField, CommandInteraction, ButtonBuilder, ButtonStyle, ChannelType, InteractionType, ActionRowBuilder, SelectMenuBuilder, TextInputStyle, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
-const MahiroStudios = require("../../structures/Client");
-const messages = require('../../config/messages.json');
-const { intersection } = require("lodash");
+const RonaldZav = require("../../structures/Client");
 const megadb = require('megadb');
 
 module.exports = {
   name: "interactionCreate",
-  run: async (client, interaction) => {
-  
-    let prefix = client.prefix;
-    const ress = interaction.guildId
-    if (ress && ress.Prefix) prefix = ress.Prefix;
-
+  run: async (client, interaction) => { const settings = await client.settings; const messages = settings.messages;
 
     if (interaction.type === InteractionType.ApplicationCommand) {
       const command = client.slashCommands.get(interaction.commandName);
@@ -31,10 +24,8 @@ module.exports = {
           return interaction.reply({ embeds: [embed] });
       }}
 
-      const player = interaction.client.manager.get(interaction.guildId);
 
-
-      try { await command.run(client, interaction, prefix); } catch (error) {
+      try { await command.run(client, interaction, "!"); } catch (error) {
         if (interaction.replied) { await interaction.editReply({ content: `¡Ocurrio un error! Avisa al equipo de Soporte` }).catch(() => {});
         } else { await interaction.reply({ ephemeral: true, content: `¡Ocurrio un error! Avisa al equipo de Soporte` }).catch(() => {}); }
         console.error(error); }}
@@ -55,11 +46,11 @@ module.exports = {
           const staffId = interaction.customId.replace('evidenceAccept-', '');
           const staff = await interaction.guild.members.fetch(staffId);
 
-          const result = parseInt(score) + parseInt(client.scoreEvidenceAccept);
+          const result = parseInt(score) + parseInt(settings.score.evidenceAccept);
           db.establecer(staffId, {score: result}, "-"); 
 
           interaction.message.edit({ components: [new ActionRowBuilder().addComponents(evidenceAcceptDisabled, evidenceDenyDisabled)] });
-          interaction.reply({ content: `Evidencia aprobada, se le sumaron ${client.scoreEvidenceAccept} puntos al staff ${staff}.` })
+          interaction.reply({ content: `Evidencia aprobada, se le sumaron ${settings.score.evidenceAccept} puntos al staff ${staff}.` })
        
         }
 
@@ -68,11 +59,11 @@ module.exports = {
           const staffId = interaction.customId.replace('evidenceDeny-', '');
           const staff = await interaction.guild.members.fetch(staffId);
 
-          const result = parseInt(score) - parseInt(client.scoreEvidenceDeny);
+          const result = parseInt(score) - parseInt(settings.score.evidenceDeny);
           db.establecer(staffId, {score: result}, "-"); 
 
           interaction.message.edit({ components: [new ActionRowBuilder().addComponents(evidenceAcceptDisabled, evidenceDenyDisabled)] });
-          interaction.reply({ content: `Evidencia rechazada, se le quitaron ${client.scoreEvidenceDeny} puntos al staff ${staff}.` })
+          interaction.reply({ content: `Evidencia rechazada, se le quitaron ${settings.score.evidenceDeny} puntos al staff ${staff}.` })
 
         }
 

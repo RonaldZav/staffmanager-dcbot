@@ -1,6 +1,5 @@
 const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
 const megadb = require("megadb");
-const messages = require('../../config/messages.json');
 
 module.exports = {
     name: "info",
@@ -10,7 +9,7 @@ module.exports = {
         { name: "miembro", description: "Selecciona a un miembro", type: ApplicationCommandOptionType.User, required: true }
     ],
         
-    run: async (client, interaction) => {
+    run: async (client, interaction) => { const settings = await client.settings; const messages = settings.messages;
 
         const member = interaction.options.getUser('miembro');
 
@@ -21,21 +20,16 @@ module.exports = {
 
         const guild = interaction.guild;
         
-        if (!guild) {
-            return interaction.reply("Este comando solo puede ser utilizado en un servidor.");
-        }
+        if (!guild) return interaction.reply("Este comando solo puede ser utilizado en un servidor.");
         
-        const guildMember = await guild.members.fetch(member);
-        
-        if (!guildMember) {
-            return interaction.reply("No se pudo obtener información del miembro.");
-        }
-        
+        let guildMember;
+        try {
+        guildMember = await guild.members.fetch(member);
+        } catch { return interaction.reply("No se pudo obtener información del miembro."); }
+
         const joinedAt = guildMember.joinedAt;
         
-        if (!joinedAt) {
-            return interaction.reply("No se pudo obtener la fecha de ingreso del miembro.");
-        }
+        if (!joinedAt) return interaction.reply("No se pudo obtener la fecha de ingreso del miembro.");
 
         const currentDate = new Date();
         const timeDifference = currentDate - joinedAt;
@@ -52,9 +46,9 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setTitle(`Info de ${guildMember.user.username}`)
-            .setColor(client.embedColor)
+            .setColor(settings.bot.embedColor)
             .setThumbnail(member.displayAvatarURL({ dynamic: true, size: 4096 }))
-            .setFooter({ text: messages.footer })
+            .setFooter({ text: messages.embed.footer })
             .setDescription(`**Puntos:** ${score}\n**Antigüedad:** ${timeOld}\n**Strikes**: ${strikes}`);
         
         interaction.reply({ embeds: [embed] });

@@ -1,12 +1,5 @@
-const { Discord, WebhookClient, PermissionsBitField, ActionRowBuilder, MessageActionRow, EmbedBuilder, SelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, CommandInteraction, Client, ApplicationCommandOptionType } = require("discord.js")
-const messages = require('../../config/messages.json');
+const { Discord, WebhookClient, PermissionsBitField, ActionRowBuilder, MessageActionRow, EmbedBuilder, SelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, CommandInteraction, Client, ApplicationCommandOptionType } = require("discord.js");
 const megadb = require('megadb');
-
-/* 
-	Developed by @RonaldZav in
-	Mahiro Studios, visit us
-	website on https://mahiro.online 
-*/
 
 module.exports = {
     name: "score",
@@ -30,7 +23,7 @@ module.exports = {
 		{ name: "valor", description: "Ingresa un número.", type: ApplicationCommandOptionType.String, required: true }
 	],
 		
-    run: async (client, interaction) => { //await interaction.deferReply({ ephemeral: true });
+    run: async (client, interaction) => { const settings = await client.settings; const messages = settings.messages;
 	
 	const miembro = interaction.options.getUser('miembro');
 	const opcion = interaction.options.getString('opcion');
@@ -41,9 +34,9 @@ module.exports = {
 	const score = await db.obtener(miembro.id + '-score', "-") || "0";
 
 	const embed = new EmbedBuilder()
-	.setTitle(messages.title)
-	.setColor(client.embedColor)
-	.setFooter({ text: messages.footer })
+	.setTitle(messages.embed.title)
+	.setColor(settings.bot.embedColor)
+	.setFooter({ text: messages.embed.footer })
 if(/^[0-9]+$/.test(valor)){
 	if(opcion === "add") {
 		embed.setDescription(`Se añadieron ${valor} puntos a ${miembro}`)

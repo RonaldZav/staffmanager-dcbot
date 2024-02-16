@@ -1,5 +1,4 @@
-const { Discord, WebhookClient, PermissionsBitField, ActionRowBuilder, MessageActionRow, EmbedBuilder, SelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, CommandInteraction, Client, ApplicationCommandOptionType } = require("discord.js")
-const messages = require('../../config/messages.json');
+const { Discord, WebhookClient, PermissionsBitField, ActionRowBuilder, MessageActionRow, EmbedBuilder, SelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, CommandInteraction, Client, ApplicationCommandOptionType } = require("discord.js");
 
 module.exports = {
     name: "rank",
@@ -10,7 +9,7 @@ module.exports = {
 		{ name: "rango", description: "Selecciona un rol para añadirselo/quitarselo", type: ApplicationCommandOptionType.Role, required: true }
 	],
 		
-    run: async (client, interaction) => { //await interaction.deferReply({ ephemeral: true });
+    run: async (client, interaction) => { const settings = await client.settings; const messages = settings.messages;
         
         const member = interaction.options.getUser('miembro');
         const role = interaction.options.getRole('rango');

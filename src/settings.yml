@@ -1,0 +1,37 @@
+# -------------------------------------------------#
+# 𝐒𝐓𝐀𝐅𝐅 𝐌𝐀𝐍𝐀𝐆𝐄𝐑 - 𝑫𝒆𝒔𝒂𝒓𝒓𝒐𝒍𝒍𝒂𝒅𝒐 𝒑𝒐𝒓 𝑹𝒐𝒏𝒂𝒍𝒅𝒁𝒂𝒗
+# 𝑫𝒆𝒔𝒂𝒓𝒓𝒐𝒍𝒍𝒂𝒅𝒐 𝒑𝒐𝒓 𝑹𝒐𝒏𝒂𝒍𝒅𝒁𝒂𝒗 - RONALDZAV.COM
+# -------------------------------------------------#
+
+# 𝐂𝐎𝐍𝐅𝐈𝐆𝐔𝐑𝐀𝐂𝐈𝐎𝐍 𝐆𝐄𝐍𝐄𝐑𝐀𝐋 ----------------- #
+bot:
+  activity: "ronaldzav.com" # Actividad del bot.
+  embedColor: "#ffffff" # Color normal.
+  embedErrorColor: "#fc0f03" # Color de error.
+  guild: "1144762157041459321" # Id del servidor donde operara.
+
+channels:
+  evidences: "1144763005540761631" # Canal donde se enviaran las evidencias.
+  waiting: "1144763219915853877" # Id del canal donde las evidencias esperan ser aprobadas.
+  alerts: "1144763123501375498" # Id del canal donde llegaran las alertas.
+
+score:
+  evidenceAccept: "5" # Cantidad de puntos a sumar por evidencia aceptada
+  evidenceDeny: "0" # Cantidad de puntos a restart por evidencia rechazada
+
+strikes:
+  limit: "3" # Cantidad de strikes para sancionar al staff.
+  sanction: "true" # Remueve el rol de staff al miembro.
+
+roles:
+  staff: "1145464512259051680" # Rol de staff.
+
+
+# 𝐌𝐄𝐍𝐒𝐀𝐉𝐄𝐒 ----------------------------------- #
+messages:
+  embed:
+    title: "Staff Manager"
+    footer: "Desarrollado por ronaldzav.com"
+  
+  evidenceChannel:
+    content: "Envía tus evidencias a este canal, tu mensaje debe contener una imagen y texto. Despues de editar el archivo de configuracion de este mensaje, borre este mensaje del canal de discord para que se vuelva a enviar."

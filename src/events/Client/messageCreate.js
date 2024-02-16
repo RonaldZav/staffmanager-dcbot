@@ -1,14 +1,10 @@
 const { PermissionsBitField, CommandInteraction, ButtonBuilder, ButtonStyle, ChannelType, InteractionType, ActionRowBuilder, SelectMenuBuilder, TextInputStyle, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
-const MahiroStudios = require("../../structures/Client");
-const messages = require('../../config/messages.json');
-const { intersection } = require("lodash");
-const megadb = require('megadb');
 
 module.exports = {
   name: "messageCreate",
-  run: async (client, message) => {
+  run: async (client, message) => { const settings = await client.settings; const messages = settings.messages;
 
-    if(message.channelId === client.evidences && message.author.id !== client.user.id){
+    if(message.channelId === settings.channels.evidences && message.author.id !== client.user.id){
 
         if(!message.attachments.size > 0){ 
             
@@ -26,10 +22,10 @@ module.exports = {
             
 
             const embed = new EmbedBuilder()
-            .setTitle(messages.title)
+            .setTitle(messages.embed.title)
             .setDescription(`**Descripción:** ${message.content}`)
-            .setColor(client.embedColor)
-            .setFooter({ text: messages.footer });
+            .setColor(settings.bot.embedColor)
+            .setFooter({ text: messages.embed.footer });
 
             const text = message.content;
             const attachments = message.attachments;
@@ -40,7 +36,7 @@ module.exports = {
                 attachmentLinks.push(attachment.url);
             });
 
-            const channel = client.channels.cache.get(client.waitingChannel);
+            const channel = await message.guild.channels.fetch(settings.channels.waiting);
 
             channel.send({ embeds: [embed], files: attachmentLinks, components: [new ActionRowBuilder().addComponents(accept, deny)] });
             setTimeout(() => { message.delete(); }, 300);

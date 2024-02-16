@@ -1,7 +1,5 @@
-const { Discord, WebhookClient, PermissionsBitField, ActionRowBuilder, MessageActionRow, EmbedBuilder, SelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, CommandInteraction, Client, ApplicationCommandOptionType } = require("discord.js")
-const messages = require('../../config/messages.json');
-const megadb = require('megadb');
-const { maxStrikes } = require("../../config/client");
+const { Discord, WebhookClient, PermissionsBitField, ActionRowBuilder, MessageActionRow, EmbedBuilder, SelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, CommandInteraction, Client, ApplicationCommandOptionType } = require("discord.js");
+const megadb = require('megadb'); 
 
 module.exports = {
     name: "strike",
@@ -11,7 +9,7 @@ module.exports = {
 		{ name: "miembro", description: "Selecciona a un staff.", type: ApplicationCommandOptionType.User, required: true },
 	],
 		
-    run: async (client, interaction) => { //await interaction.deferReply({ ephemeral: true });
+    run: async (client, interaction) => { const settings = await client.settings; const messages = settings.messages;
         
         const member = interaction.options.getUser('miembro');
 
@@ -54,7 +52,7 @@ module.exports = {
         };
 
 
-        if(actualStrikes >= maxStrikes){ alertCreate({ member: member }); strikeReset({ member: member }) } else {
-        strikeCreate({ member: member, actualStrikes: actualStrikes, maxStrikes: client.maxStrikes })
+        if(actualStrikes >= settings.strikes.limit){ alertCreate({ member: member }); strikeReset({ member: member }) } else {
+        strikeCreate({ member: member, actualStrikes: actualStrikes, maxStrikes: settings.strikes.limit })
         };
 }};
