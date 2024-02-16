@@ -7,6 +7,6 @@ Instale las dependencias usando `npm install`.
 
 Inicie el bot con el comando `node src/index.js` despues de configurarlo.
 
-Usted puede editar los mensajes desde `/src/config/messages.json`, aunque en este momento hay muy pocos mensajes editables, debido a que se encuentra en beta, pronto se podran editar todos los mensajes.
+Usted puede editar los mensajes y configuracion desde `settings.yml`.
 
 `Si Tiene Dudas Puede Contactarnos Mediante un Ticket por Discord para Ayudarle con la Configuración`
